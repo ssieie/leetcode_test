@@ -778,7 +778,43 @@ var convertToTitle = function (columnNumber = 2147483647) {
         columnNumber = Math.floor((columnNumber - 1) / 26)
 
     }
-   
+
     return result.split('').reverse().join('')
 
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function (nums = [3, 2, 3]) {
+    // const obj = {}
+    // for (let i = 0, len = nums.length; i < len; i++) {
+    //     obj[nums[i]] ? obj[nums[i]]++ : obj[nums[i]] = 1
+    // }
+
+    // const a = [0, 0]
+
+    // for (const [key, value] of Object.entries(obj)) {
+    //     if (value > a[1]) {
+    //         a[1] = value
+    //         a[0] = key
+    //     }
+    // }
+
+    // return +a[0]
+
+    let candidate = null;
+    let count = 0;
+
+    // 第一遍扫描，找出候选元素
+    for (let num of nums) {
+        if (count === 0) {
+            candidate = num;
+        }
+        count += (num === candidate) ? 1 : -1;
+    }
+
+    // 返回候选元素
+    return candidate;
 };
