@@ -713,3 +713,59 @@ var hasCycle = function (head) {
     }
     return false
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function (root) {
+    if (!root) return []
+
+    const res = []
+
+    const iterationTree = (tree) => {
+        if (tree) {
+            tree.left && iterationTree(tree.left)
+            tree.right && iterationTree(tree.right)
+            res.push(tree.val)
+        }
+    }
+
+    iterationTree(root)
+};
+var postorderTraversal = function (root) {
+    if (!root) return []
+
+    const stack = [];   // 模拟递归的栈
+    const output = [];  // 存储逆序的后序结果
+
+    stack.push(root);
+
+    while (stack.length) {
+        const node = stack.pop(); // 弹出栈顶节点
+        output.push(node.val);    // 将当前节点值存入结果栈
+
+        // 先压入左子节点，再压入右子节点
+        if (node.left) stack.push(node.left);
+        if (node.right) stack.push(node.right);
+    }
+
+    // 逆序结果栈，得到后序遍历结果
+    return output.reverse();
+};
+
+/**
+ * @param {number} columnNumber
+ * @return {string}
+ */
+var convertToTitle = function(columnNumber) {
+    // 取余26为最后一位对应的列标识
+};
