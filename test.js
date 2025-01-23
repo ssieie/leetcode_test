@@ -766,6 +766,19 @@ var postorderTraversal = function (root) {
  * @param {number} columnNumber
  * @return {string}
  */
-var convertToTitle = function(columnNumber) {
+var convertToTitle = function (columnNumber = 2147483647) {
     // 取余26为最后一位对应的列标识
+    let result = ''
+
+    while (columnNumber > 0) {
+        const a = (columnNumber - 1) % 26
+
+        result += String.fromCharCode(65 + a)
+
+        columnNumber = Math.floor((columnNumber - 1) / 26)
+
+    }
+   
+    return result.split('').reverse().join('')
+
 };
