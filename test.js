@@ -818,3 +818,94 @@ var majorityElement = function (nums = [3, 2, 3]) {
     // 返回候选元素
     return candidate;
 };
+
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isBalanced = function (root) {
+
+    const getHeight = (tree) => {
+        if (!tree) {
+            return 0
+        }
+
+        // 递归计算左子树的高度 0
+        const leftHeight = getHeight(node.left);
+        if (leftHeight === -1) {
+            return -1; // 左子树不平衡，直接返回 -1
+        }
+
+        // 递归计算右子树的高度
+        const rightHeight = getHeight(node.right);
+        if (rightHeight === -1) {
+            return -1; // 右子树不平衡，直接返回 -1
+        }
+
+        // 判断当前节点是否平衡
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1; // 当前节点不平衡
+        }
+
+        // 返回当前节点的高度
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    const height = getHeight(root)
+
+    return height !== -1;
+};
+
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function (root) {
+
+    const depth = (tree) => {
+        if (!tree) return 0
+
+        if (!tree.left) {
+            return depth(tree.right) + 1;
+        }
+
+        // 如果右子树为空，递归计算左子树深度
+        if (!tree.right) {
+            return depth(tree.left) + 1;
+        }
+
+        // 如果左右子树都存在，取较小值
+        return Math.min(depth(tree.left), depth(tree.right)) + 1;
+    }
+
+    return depth(root)
+};
+
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function (root, targetSum) {
+    const stack = []
+    stack.push(root)
+
+    while (stack.length) {
+        const node = stack.pop()
+        if (node === null) return false
+        if (node.val === targetSum && node.left === null && node.right === null) {
+            return true
+        }
+
+        if (node.left !== null) {
+            node.left.val += node.val
+            stack.push(node.left)
+        }
+        if (node.right !== null) {
+            node.right.val += node.val
+            stack.push(node.right)
+        }
+    }
+
+    return false
+};
