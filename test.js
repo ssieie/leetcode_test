@@ -909,3 +909,58 @@ var hasPathSum = function (root, targetSum) {
 
     return false
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function (headA, headB) {
+
+};
+
+const waiting = (w = 2) => {
+    return new Promise((r) => {
+        setTimeout(() => {
+            r()
+        }, w * 1000)
+    })
+}
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum21 = async function (candidates = [10, 1, 2, 1, 5, 6, 7], target = 8) {
+    candidates = candidates.sort((a, b) => a - b) // 1 1 2 5 6 7 10
+    const result = []
+
+    function backtrack(start, target, currentCombination) {
+        if (target === 0) {
+            result.push([...currentCombination]);
+            return;
+        }
+
+        for (let i = start; i < candidates.length; i++) {
+            if (candidates[i] > target) break;
+            if (i > start && candidates[i] === candidates[i - 1]) continue;
+            currentCombination.push(candidates[i]);
+            backtrack(i + 1, target - candidates[i], currentCombination);
+            currentCombination.pop();
+        }
+
+    }
+    backtrack(0, target, []);
+
+    return result;
+
+}
