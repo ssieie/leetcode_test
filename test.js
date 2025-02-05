@@ -924,7 +924,16 @@ var hasPathSum = function (root, targetSum) {
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-
+    if (!headA || !headB) return null;
+    
+    let pA = headA, pB = headB;
+    
+    while (pA !== pB) {
+        pA = pA ? pA.next : headB;
+        pB = pB ? pB.next : headA;
+    }
+    
+    return pA;
 };
 
 const waiting = (w = 2) => {
