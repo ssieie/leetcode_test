@@ -925,14 +925,14 @@ var hasPathSum = function (root, targetSum) {
  */
 var getIntersectionNode = function (headA, headB) {
     if (!headA || !headB) return null;
-    
+
     let pA = headA, pB = headB;
-    
+
     while (pA !== pB) {
         pA = pA ? pA.next : headB;
         pB = pB ? pB.next : headA;
     }
-    
+
     return pA;
 };
 
@@ -973,3 +973,18 @@ var combinationSum21 = async function (candidates = [10, 1, 2, 1, 5, 6, 7], targ
     return result;
 
 }
+
+var titleToNumber = function (columnTitle = "AB") {
+    let result = 0
+
+    columnTitle = columnTitle.split('')
+
+    for (let i = 0; i < columnTitle.length; i++) {
+
+        result = result * 26 + (columnTitle[i].charCodeAt() - 64)
+
+    }
+
+    return result
+};
+
