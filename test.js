@@ -988,3 +988,20 @@ var titleToNumber = function (columnTitle = "AB") {
     return result
 };
 
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var hammingWeight = function (n = 11) {
+    return n.toString(2).split('1').length - 1;
+
+    // let count = 0;
+    // while (n !== 0) {
+    //     n &= (n - 1); // 清除最低位的 1
+    //     count++;
+    // }
+    // return count;
+};
+
+
+
